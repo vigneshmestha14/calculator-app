@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Calculator</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Professional Calculator</h1>
+        <form method="POST">
+            <input type="text" name="display" id="display" value="{{ result }}" readonly>
+            <div class="buttons">
+                <button type="button" class="btn" onclick="appendToDisplay('7')">7</button>
+                <button type="button" class="btn" onclick="appendToDisplay('8')">8</button>
+                <button type="button" class="btn" onclick="appendToDisplay('9')">9</button>
+                <button type="button" class="btn operator" onclick="appendToDisplay('/')">/</button>
+
+                <button type="button" class="btn" onclick="appendToDisplay('4')">4</button>
+                <button type="button" class="btn" onclick="appendToDisplay('5')">5</button>
+                <button type="button" class="btn" onclick="appendToDisplay('6')">6</button>
+                <button type="button" class="btn operator" onclick="appendToDisplay('*')">×</button>
+
+                <button type="button" class="btn" onclick="appendToDisplay('1')">1</button>
+                <button type="button" class="btn" onclick="appendToDisplay('2')">2</button>
+                <button type="button" class="btn" onclick="appendToDisplay('3')">3</button>
+                <button type="button" class="btn operator" onclick="appendToDisplay('-')">−</button>
+
+                <button type="button" class="btn" onclick="appendToDisplay('0')">0</button>
+                <button type="button" class="btn" onclick="clearDisplay()">C</button>
+                <button type="submit" class="btn">=</button>
+                <button type="button" class="btn operator" onclick="appendToDisplay('+')">+</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+            display.style.transform = 'scale(1.02)';
+            setTimeout(() => display.style.transform = 'scale(1)', 100);
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+            display.style.transform = 'scale(0.98)';
+            setTimeout(() => display.style.transform = 'scale(1)', 100);
+        }
+
+        // Add keyboard support
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            if (/[0-9+\-*\/]/.test(key)) {
+                appendToDisplay(key);
+            } else if (key === 'Enter') {
+                document.querySelector('button[type="submit"]').click();
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                clearDisplay();
+            }
+        });
+    </script>
+</body>
+</html>
