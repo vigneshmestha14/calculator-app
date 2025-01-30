@@ -32,6 +32,7 @@
                 <button type="button" class="btn" id="equals" onclick="calculateResult()">=</button>
                 <button type="button" class="btn operator" onclick="appendToDisplay('+')">+</button>
                 <button type="button" class="btn" onclick="appendToDisplay('.')">.</button>
+                <button type="button" class="btn" onclick="backspace()">⌫</button>
             </div>
         </form>
     </div>
@@ -52,6 +53,11 @@
             const expression = display.value;
             const result = eval(expression.replace(/0*(\d+)/g, '$1'));
             display.value = result;
+        }
+
+        function backspace() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
         }
     </script>
 </body>
